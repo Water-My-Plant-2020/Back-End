@@ -6,10 +6,10 @@ module.exports = {
 			filename: "./data/plants.db3",
 		},
 		migrations: {
-			directory: "./migrations",
+			directory: "./data/migrations",
 		},
 		seeds: {
-			directory: "./seeds",
+			directory: "./data/seeds",
 		},
 	},
 	testing: {
