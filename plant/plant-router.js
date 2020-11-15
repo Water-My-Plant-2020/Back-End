@@ -12,7 +12,7 @@ router.get("/", (req, res) => {
     })
 })
 
-router.get("/:d", (req, res) => {
+router.get("/:id", (req, res) => {
     plants.getPlantsByID(req.params.id)
     .then(plants => {
        if(plants){
