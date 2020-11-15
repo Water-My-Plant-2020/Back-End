@@ -16,7 +16,7 @@ router.get("/:id", (req, res) => {
     plants.getPlantsByID(req.params.id)
     .then(plants => {
        if(plants){
-           res.json(pants)
+           res.json(plants)
        } else {
            res.status(404).json({ message: "There are no plants that match that ID" })
        }
