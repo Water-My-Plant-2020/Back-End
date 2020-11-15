@@ -8,8 +8,8 @@ function getPlantsByID(id) {
     return db('plants').where({id}).first()
 }
 
-function addPlant(newTask) {
-    return db('plants').insert(newTask)
+function addPlant(newPlant) {
+    return db('plants').insert(newPlant)
 }
 
 function removePlant(id) {
