@@ -42,7 +42,7 @@ router.delete('/:id', (req,res) => {
         if(deleted){
             res.json({removed: deleted})
         }else{
-            res.status(404).json({message: 'no task matching that ID exists'})
+            res.status(404).json({message: 'no plant matching that ID exists'})
         }
     }).catch(err => {
         res.status(500).json({ message: 'an error has occurred' });
