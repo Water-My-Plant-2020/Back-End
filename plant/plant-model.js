@@ -1,4 +1,4 @@
-const db = require("../data/config")
+const db = require("../config")
 
 function getPlants() {
     return db('plants')
@@ -20,5 +20,5 @@ module.exports = {
 	getPlants,
     getPlantsByID,
     addPlant,
-    removePlant
+    removePlant,
 }
