@@ -1,10 +1,24 @@
 const db = require("../data/config")
 
-async function add(user) {
-	const [id] = await db("users").insert(user)
-	return findById(id)
+function getPlants() {
+    return db('plants')
+}
+
+function getPlantsByID(id) {
+    return db('plants').where({id}).first()
+}
+
+function addPlant(newTask) {
+    return db('plants').insert(newTask)
+}
+
+function removePlant(id) {
+    return db('plants').where({ id }).del()
 }
 
 module.exports = {
-	
+	getPlants,
+    getPlantsByID,
+    addPlant,
+    removePlant
 }
