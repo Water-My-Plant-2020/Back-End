@@ -12,5 +12,19 @@ router.get("/", (req, res) => {
     })
 })
 
+router.get("/:d", (req, res) => {
+    plants.getPlantsByID(req.params.id)
+    .then(plants => {
+       if(plants){
+           res.json(pants)
+       } else {
+           res.status(404).json({ message: "There are no plants that match that ID" })
+       }
+    })
+    .catch(err => {
+        res.status(500).json({message: "An error has occurred"})
+    })
+})
+
 
 module.exports = router;
