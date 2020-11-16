@@ -27,6 +27,28 @@ router.get("/:id", (req, res) => {
     })
 })
 
+router.put("/:id", (req, res) => {
+    if (!req.body.nickname || !req.body.speciesName) {
+        return res.status(400).json({
+            message: "Missing nickname or species name",
+        })
+    }
+    plants.updatePlantsByID(req.params.id, req.body)
+    .then((plant) => {
+        if(plant) {
+            res.status(200).json(plant)
+        } else {
+            res.status(404).json({ message: "The plant could not be found", })
+        }
+    })
+    .catch((err) => {
+        console.log(err)
+        res.status(500).json({
+            message: "Error updating the plant",
+        })
+    })
+})
+
 router.post('/', async (req,res, next) => {
      try {
 		const data = await plants.addPlant(req.body)
