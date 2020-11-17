@@ -3,7 +3,6 @@ const cors = require("cors")
 const plantRouter = require("./plant/plant-router")
 const userRouter = require("./user/user-router")
 
-
 const server = express()
 
 server.use(cors())
