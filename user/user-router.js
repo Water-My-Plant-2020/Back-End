@@ -73,56 +73,56 @@ router.delete('/:id', (req,res) => {
       });
 })
 
-// router.post("/login", async (req, res, next) => {
-// 	try {
-// 		const { username, password } = req.body
-//         const user = await Users
-//         .findBy({ username })
-//         .first()
-// 		// why does this not work
-// 		// if (!user || user.password !== password{
-// 		//  look below })
+router.post("/login", async (req, res, next) => {
+	try {
+		const { username, password } = req.body
+        const user = await Users
+        .getUsers({ username })
+        .first()
+		// why does this not work
+		// if (!user || user.password !== password{
+		//  look below })
 
 		
-// 		if (!user) {
-// 			return res.status(401).json({
-// 				message: "Invalid Credentials",
-// 			})
-// 		}
-// 		//move this below the user check
-//         const passwordValid = await bcrypt
-//         .compare(password, user.password)
+		if (!user) {
+			return res.status(401).json({
+				message: "Invalid Credentials",
+			})
+		}
+		//move this below the user check
+        const passwordValid = await bcrypt
+        .compare(password, user.password)
 
-// 		if (!passwordValid) {
-// 			return res.status(401).json({
-// 				message: "Invalid Credentials"
-// 			})
-// 		}
-// 		// will
-// 		req.session.user = user
+		if (!passwordValid) {
+			return res.status(401).json({
+				message: "Invalid Credentials"
+			})
+		}
+		// will
+		req.session.user = user
 
-// 		res.json({
-// 			message: `Welcome ${user.username}!`,
-// 		})
-// 	} catch(err) {
-// 		next(err)
-// 	}
-// })
+		res.json({
+			message: `Welcome ${user.username}!`,
+		})
+	} catch(err) {
+		next(err)
+	}
+})
 
-// router.get("/logout", async (req, res, next) => {
-// 	try {
-// 		// deletes the session on the server-side, so the user is no longer authenticated
-// 		req.session.destroy((err) => {
-// 			if (err) {
-// 				next(err)
-// 			} else {
-// 				res.status(204).end()
-// 			}
-// 		})
-// 	} catch (err) {
-// 		next(err)
-// 	}
-// })
+router.get("/logout", async (req, res, next) => {
+	try {
+		// deletes the session on the server-side, so the user is no longer authenticated
+		req.session.destroy((err) => {
+			if (err) {
+				next(err)
+			} else {
+				res.status(204).end()
+			}
+		})
+	} catch (err) {
+		next(err)
+	}
+})
 
 module.exports = router;
 
