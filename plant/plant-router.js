@@ -3,7 +3,7 @@ const { addPlant } = require('./plant-model');
 const router = express.Router();
 const plants = require("./plant-model")
 
-//GET PLANTS
+//GET PLANTS     /plants
 router.get("/", (req, res) => {
     plants.getPlants()
     .then(plants => {
@@ -14,7 +14,7 @@ router.get("/", (req, res) => {
     })
 })
 
-//GET PLANTS BY ID
+//GET PLANTS BY ID    /plants/id
 router.get("/:id", (req, res) => {
     plants.getPlantsByID(req.params.id)
     .then(plants => {
@@ -29,7 +29,7 @@ router.get("/:id", (req, res) => {
     })
 })
 
-//UPDATE USERS BY ID
+//UPDATE USERS BY ID     /plants/id
 router.put("/:id", (req, res) => {
     if (!req.body.nickname || !req.body.speciesName) {
         return res.status(400).json({
@@ -52,7 +52,7 @@ router.put("/:id", (req, res) => {
     })
 })
 
-//ADD OR CREATE PLANTS, ID IS AUTOINCREMENTING
+//ADD OR CREATE PLANTS, ID IS AUTOINCREMENTING     /plants
 router.post('/', async (req,res, next) => {
      try {
 		const data = await plants.addPlant(req.body)
@@ -62,7 +62,7 @@ router.post('/', async (req,res, next) => {
 	}
 })
 
-//DELETE PLANTS BY ID
+//DELETE PLANTS BY ID   /plants/id
 router.delete('/:id', (req,res) => {
     const {id} = req.params;
     plants.removePlant(id).then(deleted => {
