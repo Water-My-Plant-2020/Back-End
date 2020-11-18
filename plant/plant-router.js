@@ -3,6 +3,7 @@ const { addPlant } = require('./plant-model');
 const router = express.Router();
 const plants = require("./plant-model")
 
+//GET PLANTS
 router.get("/", (req, res) => {
     plants.getPlants()
     .then(plants => {
@@ -13,6 +14,7 @@ router.get("/", (req, res) => {
     })
 })
 
+//GET PLANTS BY ID
 router.get("/:id", (req, res) => {
     plants.getPlantsByID(req.params.id)
     .then(plants => {
@@ -27,6 +29,7 @@ router.get("/:id", (req, res) => {
     })
 })
 
+//UPDATE USERS BY ID
 router.put("/:id", (req, res) => {
     if (!req.body.nickname || !req.body.speciesName) {
         return res.status(400).json({
@@ -49,6 +52,7 @@ router.put("/:id", (req, res) => {
     })
 })
 
+//ADD OR CREATE PLANTS, ID IS AUTOINCREMENTING
 router.post('/', async (req,res, next) => {
      try {
 		const data = await plants.addPlant(req.body)
@@ -58,28 +62,7 @@ router.post('/', async (req,res, next) => {
 	}
 })
 
-router.delete('/:id', (req,res) => {
-    const {id} = req.params;
-    plants.removePlant(id).then(deleted => {
-        if(deleted){
-            res.json({removed: deleted})
-        }else{
-            res.status(404).json({message: 'no plant matching that ID exists'})
-        }
-    }).catch(err => {
-        res.status(500).json({ message: 'an error has occurred' });
-      });
-})
-
-router.post('/', async (req,res, next) => {
-     try {
-		const data = await plants.addPlant(req.body)
-		res.status(201).json(data)
-	} catch(err) {
-		next(err)
-	}
-})
-
+//DELETE PLANTS BY ID
 router.delete('/:id', (req,res) => {
     const {id} = req.params;
     plants.removePlant(id).then(deleted => {
