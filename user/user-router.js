@@ -5,6 +5,9 @@ const router = express.Router();
 const users = require("./user-model")
 // const { restrict } = require("./user-middleware")
 
+
+//.....get ... /user
+
 router.get("/", (req, res) => {
     users.getUsers()
     .then(users => {
@@ -14,6 +17,10 @@ router.get("/", (req, res) => {
         res.status(500).json({ message: "Cannot get user list." })
     })
 })
+
+
+// .....get .... /user/id .....
+
 
 router.get("/:id", (req, res) => {
     users.getUsersByID(req.params.id)
@@ -28,6 +35,11 @@ router.get("/:id", (req, res) => {
         res.status(500).json({message: "An error has occurred"})
     })
 })
+
+
+// .... put ... /user/id  .... 
+
+
 
 router.put("/:id", (req, res) => {
     if (!req.body.username || !req.body.phoneNumber) {
@@ -50,6 +62,8 @@ router.put("/:id", (req, res) => {
         })
     })
 })
+
+
 
 router.post('/', async (req,res, next) => {
      try {
