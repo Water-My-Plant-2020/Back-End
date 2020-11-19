@@ -3,7 +3,7 @@ const jwt = require('jsonwebtoken');
 const router = require('express').Router();
 const userModel = require('../user/user-model');
 const validateToken = require('./validateToken');
-
+require("dotenv").config()
 
 /******************************************************************************
  *                      Register User - "POST /api/auth/register"
@@ -14,7 +14,7 @@ router.post('/register', async (req, res) => {
   const hash = bcrypt.hashSync(user.password, 10);
   user.password = hash;
   try {
-    await userModel.create(user);
+    await userModel.addUser(user);
     res.status(201).json({message: 'User successfully created'});
   } catch (err) {
     console.log(err);
@@ -31,17 +31,18 @@ router.post('/register', async (req, res) => {
 router.post("/login", async (req, res, next) => {
   try {
     const {username, password} = req.body
-    const user = await userModel.getUsers({username});
-    if (user.length === 0) {
+    const user = await userModel.findBy({username:username});
+    if (!user) {
       return res.status(401).json({
         message: "Invalid Credentials",
       })
     }
     // hash the password again and see if it matches what we have in the database
+    console.log(password, user[0]);
     const passwordValid = bcrypt.compareSync(password, user[0].password)
     if (!passwordValid) {
       return res.status(401).json({
-        message: "Invalid Credentials",
+        message: "Invalid Today",
       })
     }
     // generate a new JSON web token
