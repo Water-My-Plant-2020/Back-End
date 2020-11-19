@@ -49,7 +49,7 @@ router.post("/login", async (req, res, next) => {
     const token = jwt.sign({
       userID: user[0].id,
       userAdmin: user[0].admin
-    }, process.env.JWT_SECRET)
+    }, "This is my secret code")
     // send the token back as a cookie
     res.cookie("token", token, {
       sameSite: "none",
