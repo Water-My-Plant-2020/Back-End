@@ -88,11 +88,14 @@ router.post('/', async (req,res, next) => {
 // })
 
 router.post("/login", async (req, res, next) => {
+    console.log("help",req.body);
 	try {
 		const { username, password } = req.body
         const user = await Users
         .getUsers({ username })
+
         .first()
+        console.log("user",user)
 		// why does this not work
 		// if (!user || user.password !== password{
 		//  look below })
