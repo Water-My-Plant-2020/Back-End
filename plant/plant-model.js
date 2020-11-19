@@ -5,7 +5,9 @@ function getPlants() {
 }
 
 function getPlantsByID(id) {
-    return db('plants').where({id}).first()
+    return db('plants')
+        .where({id})
+        .first()
 }
 
 async function updatePlantsByID(id, changes) {
@@ -17,11 +19,14 @@ async function updatePlantsByID(id, changes) {
 }
 
 function addPlant(newPlant) {
-    return db('plants').insert(newPlant)
+    return db('plants')
+        .insert(newPlant)
 }
 
 function removePlant(id) {
-    return db('plants').where({ id }).del()
+    return db('plants')
+        .where({ id })
+        .del()
 }
 
 module.exports = {

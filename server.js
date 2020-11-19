@@ -2,12 +2,14 @@ const express = require("express")
 const cors = require("cors")
 const plantRouter = require("./plant/plant-router")
 const userRouter = require("./user/user-router")
+const authRouter = require("./auth/auth-router")
 
 const server = express()
 
 server.use(cors())
 server.use(express.json())
 
+server.use("/", authRouter)
 server.use("/plants", plantRouter)
 server.use("/users", userRouter)
 
